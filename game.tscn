@@ -1,3 +1,14 @@
-[gd_scene format=3 uid="uid://cjtvc1cc2mw4l"]
+[gd_scene load_steps=2 format=3 uid="uid://cjtvc1cc2mw4l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwb40"]
+bg_color = Color(0.151276, 0.151276, 0.151276, 1)
 
 [node name="game" type="Node"]
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mwb40")
