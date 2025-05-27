@@ -17,9 +17,20 @@ var animals = {
 
 @onready var money_label = get_node("MoneyLabel")
 
+@onready var conejos_buy_button_x1 = get_node("ConejosBuyButton_x1")
+@onready var conejos_buy_button_x5 = get_node("ConejosBuyButton_x5")
+@onready var conejos_buy_button_x10 = get_node("ConejosBuyButton_x10")
+@onready var conejos_buy_button_x100 = get_node("ConejosBuyButton_x100")
+
 func _ready():
 	update_money_display()
 	setup_animal_timers()
+
+	# Connect Conejos buy buttons programmatically
+	conejos_buy_button_x1.pressed.connect(func(): _on_ConejosBuyButton_pressed(1))
+	conejos_buy_button_x5.pressed.connect(func(): _on_ConejosBuyButton_pressed(5))
+	conejos_buy_button_x10.pressed.connect(func(): _on_ConejosBuyButton_pressed(10))
+	conejos_buy_button_x100.pressed.connect(func(): _on_ConejosBuyButton_pressed(100))
 
 func setup_animal_timers():
 	for animal_name in animals:
@@ -63,6 +74,7 @@ func check_speed_threshold(animal_name):
 		if animal.quantity >= threshold:
 			animal.current_sale_time = max(0.5, animal.current_sale_time / 2.0)
 			animal.timer.wait_time = animal.current_sale_time
+			animal.timer.start() # Restart the timer with the new speed
 			animal.current_threshold_index += 1
 			print(animal_name, " speed increased! New sale time: ", animal.current_sale_time) # Replace with UI notification
 
@@ -96,19 +108,3 @@ func _on_OsosBuyButton_pressed(quantity):
 
 func _on_ElefantesBuyButton_pressed(quantity):
 	buy_animal("Elefantes", quantity)
-
-# Example buy button signal connections with quantities
-# Connect the pressed() signal of each buy button to the corresponding function,
-# binding the desired quantity as an argument.
-
-# Example for Conejos x1 button:
-# Node: ConejosBuyButton_x1
-# Signal: pressed()
-# Connect to: _on_ConejosBuyButton_pressed()
-# Bind argument: 1
-
-# Example for Conejos x5 button:
-# Node: ConejosBuyButton_x5
-# Signal: pressed()
-# Connect to: _on_ConejosBuyButton_pressed()
-# Bind argument: 5
