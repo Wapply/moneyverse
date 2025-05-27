@@ -31,8 +31,12 @@ func setup_animal_timers():
 		animals[animal_name]["timer"] = timer
 		timer.wait_time = animals[animal_name]["current_sale_time"]
 		timer.autostart = true
-		timer.timeout.connect(func(): sell_animal(animal_name))
-		print("Timer set up for ", animal_name, " with wait time ", timer.wait_time)
+		timer.timeout.connect(func(): 
+			print("Timer for ", animal_name, " timed out!")
+			sell_animal(animal_name)
+		)
+		timer.start() # Explicitly start the timer
+		print("Timer set up and started for ", animal_name, " with wait time ", timer.wait_time)
 	print("Animal timer setup complete.")
 
 func buy_animal(animal_name, quantity_to_buy):
@@ -78,16 +82,16 @@ func check_speed_threshold(animal_name):
 			print(animal_name, " speed increased! New sale time: ", animal.current_sale_time) # Replace with UI notification
 
 # Functions for each Conejos buy button
-func _on_conejos_buy_button_x_1_pressed():
+func _on_ConejosBuyButton_x1_pressed():
 	buy_animal("Conejos", 1)
 
-func _on_conejos_buy_button_x_5_pressed():
+func _on_ConejosBuyButton_x5_pressed():
 	buy_animal("Conejos", 5)
 
-func _on_conejos_buy_button_x_10_pressed():
+func _on_ConejosBuyButton_x10_pressed():
 	buy_animal("Conejos", 10)
 
-func _on_conejos_buy_button_x_100_pressed():
+func _on_ConejosBuyButton_x100_pressed():
 	buy_animal("Conejos", 100)
 
 # Example buy functions for other animals (connect these to buttons)
