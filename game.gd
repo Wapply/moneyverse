@@ -51,12 +51,22 @@ func sell_animal(animal_name):
 		update_money_display()
 
 func update_money_display():
-	money_label.text = "Money: $" + str(money)
+	print("Attempting to update money display.")
+	print("MoneyLabel node:", money_label)
+	if money_label != null:
+		money_label.text = "Money: $" + str(money)
+	else:
+		print("Error: MoneyLabel node is null!")
 
 func update_animal_display(animal_name):
 	var animal = animals[animal_name]
+	print("Getting quantity label for:", animal_name)
 	var quantity_label = get_node("VBoxContainer/" + animal_name + "QuantityLabel")
-	quantity_label.text = str(animal.quantity)
+	print("Quantity label node:", quantity_label)
+	if quantity_label != null:
+		quantity_label.text = str(animal.quantity)
+	else:
+		print("Error: Quantity label node is null for", animal_name + "QuantityLabel")
 
 func check_speed_threshold(animal_name):
 	var animal = animals[animal_name]
@@ -70,14 +80,42 @@ func check_speed_threshold(animal_name):
 			print(animal_name, " speed increased! New sale time: ", animal.current_sale_time) # Replace with UI notification
 
 # Functions for each Conejos buy button
-func _on_conejos_buy_button_x_1_pressed() -> void:
+func _on_ConejosBuyButton_x1_pressed():
 	buy_animal("Conejos", 1)
 
-func _on_conejos_buy_button_x_5_pressed() -> void:
+func _on_ConejosBuyButton_x5_pressed():
 	buy_animal("Conejos", 5)
 
-func _on_conejos_buy_button_x_10_pressed() -> void:
+func _on_ConejosBuyButton_x10_pressed():
 	buy_animal("Conejos", 10)
 
-func _on_conejos_buy_button_x_100_pressed() -> void:
+func _on_ConejosBuyButton_x100_pressed():
 	buy_animal("Conejos", 100)
+
+# Example buy functions for other animals (connect these to buttons)
+func _on_GallinasBuyButton_pressed(quantity):
+	buy_animal("Gallinas", quantity)
+
+func _on_CerdosBuyButton_pressed(quantity):
+	buy_animal("Cerdos", quantity)
+
+func _on_CaballosBuyButton_pressed(quantity):
+	buy_animal("Caballos", quantity)
+
+func _on_VacasBuyButton_pressed(quantity):
+	buy_animal("Vacas", quantity)
+
+func _on_PerrosBuyButton_pressed(quantity):
+	buy_animal("Perros", quantity)
+
+func _on_GatosBuyButton_pressed(quantity):
+	buy_animal("Gatos", quantity)
+
+func _on_AguilasBuyButton_pressed(quantity):
+	buy_animal("Águilas", quantity)
+
+func _on_OsosBuyButton_pressed(quantity):
+	buy_animal("Osos", quantity)
+
+func _on_ElefantesBuyButton_pressed(quantity):
+	buy_animal("Elefantes", quantity)
