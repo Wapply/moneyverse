@@ -24,6 +24,7 @@ func _ready():
 	setup_animal_timers()
 
 func setup_animal_timers():
+	print("Setting up animal timers...")
 	for animal_name in animals:
 		var timer = Timer.new()
 		add_child(timer)
@@ -31,6 +32,8 @@ func setup_animal_timers():
 		timer.wait_time = animals[animal_name]["current_sale_time"]
 		timer.autostart = true
 		timer.timeout.connect(func(): sell_animal(animal_name))
+		print("Timer set up for ", animal_name, " with wait time ", timer.wait_time)
+	print("Animal timer setup complete.")
 
 func buy_animal(animal_name, quantity_to_buy):
 	var animal = animals[animal_name]
@@ -41,14 +44,19 @@ func buy_animal(animal_name, quantity_to_buy):
 		update_money_display()
 		update_animal_display(animal_name)
 		check_speed_threshold(animal_name)
+		print("Bought ", quantity_to_buy, " ", animal_name, ". Current quantity: ", animal.quantity)
 	else:
-		print("Not enough money to buy ", quantity_to_buy, " ", animal_name) # Replace with a proper UI notification
+		print("Not enough money to buy ", quantity_to_buy, " ", animal_name, ". Money: ", money, ", Cost: ", cost)
 
 func sell_animal(animal_name):
 	var animal = animals[animal_name]
+	print("Attempting to sell ", animal_name, ". Quantity: ", animal.quantity)
 	if animal.quantity > 0:
 		money += animal.price * animal.quantity
 		update_money_display()
+		print("Sold ", animal.quantity, " ", animal_name, ". Gained: ", animal.price * animal.quantity, ". New money: ", money)
+	else:
+		print("No ", animal_name, " to sell.")
 
 func update_money_display():
 	money_label.text = "Money: $" + str(money)
@@ -70,16 +78,16 @@ func check_speed_threshold(animal_name):
 			print(animal_name, " speed increased! New sale time: ", animal.current_sale_time) # Replace with UI notification
 
 # Functions for each Conejos buy button
-func _on_conejos_buy_button_x_1_pressed():
+func _on_ConejosBuyButton_x1_pressed():
 	buy_animal("Conejos", 1)
 
-func _on_conejos_buy_button_x_5_pressed():
+func _on_ConejosBuyButton_x5_pressed():
 	buy_animal("Conejos", 5)
 
-func _on_conejos_buy_button_x_10_pressed():
+func _on_ConejosBuyButton_x10_pressed():
 	buy_animal("Conejos", 10)
 
-func _on_conejos_buy_button_x_100_pressed():
+func _on_ConejosBuyButton_x100_pressed():
 	buy_animal("Conejos", 100)
 
 # Example buy functions for other animals (connect these to buttons)
