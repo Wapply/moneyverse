@@ -70,42 +70,14 @@ func check_speed_threshold(animal_name):
 			print(animal_name, " speed increased! New sale time: ", animal.current_sale_time) # Replace with UI notification
 
 # Functions for each Conejos buy button
-func _on_ConejosBuyButton_x1_pressed():
+func _on_conejos_buy_button_x_1_pressed() -> void:
 	buy_animal("Conejos", 1)
 
-func _on_ConejosBuyButton_x5_pressed():
+func _on_conejos_buy_button_x_5_pressed() -> void:
 	buy_animal("Conejos", 5)
 
-func _on_ConejosBuyButton_x10_pressed():
+func _on_conejos_buy_button_x_10_pressed() -> void:
 	buy_animal("Conejos", 10)
 
-func _on_ConejosBuyButton_x100_pressed():
+func _on_conejos_buy_button_x_100_pressed() -> void:
 	buy_animal("Conejos", 100)
-
-# Example buy functions for other animals (connect these to buttons)
-func _on_GallinasBuyButton_pressed(quantity):
-	buy_animal("Gallinas", quantity)
-
-func _on_CerdosBuyButton_pressed(quantity):
-	buy_animal("Cerdos", quantity)
-
-func _on_CaballosBuyButton_pressed(quantity):
-	buy_animal("Caballos", quantity)
-
-func _on_VacasBuyButton_pressed(quantity):
-	buy_animal("Vacas", quantity)
-
-func _on_PerrosBuyButton_pressed(quantity):
-	buy_animal("Perros", quantity)
-
-func _on_GatosBuyButton_pressed(quantity):
-	buy_animal("Gatos", quantity)
-
-func _on_AguilasBuyButton_pressed(quantity):
-	buy_animal("Águilas", quantity)
-
-func _on_OsosBuyButton_pressed(quantity):
-	buy_animal("Osos", quantity)
-
-func _on_ElefantesBuyButton_pressed(quantity):
-	buy_animal("Elefantes", quantity)
