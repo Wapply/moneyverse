@@ -51,22 +51,12 @@ func sell_animal(animal_name):
 		update_money_display()
 
 func update_money_display():
-	print("Attempting to update money display.")
-	print("MoneyLabel node:", money_label)
-	if money_label != null:
-		money_label.text = "Money: $" + str(money)
-	else:
-		print("Error: MoneyLabel node is null!")
+	money_label.text = "Money: $" + str(money)
 
 func update_animal_display(animal_name):
 	var animal = animals[animal_name]
-	print("Getting quantity label for:", animal_name)
 	var quantity_label = get_node("VBoxContainer/" + animal_name + "QuantityLabel")
-	print("Quantity label node:", quantity_label)
-	if quantity_label != null:
-		quantity_label.text = str(animal.quantity)
-	else:
-		print("Error: Quantity label node is null for", animal_name + "QuantityLabel")
+	quantity_label.text = str(animal.quantity)
 
 func check_speed_threshold(animal_name):
 	var animal = animals[animal_name]
