@@ -22,10 +22,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_80nbo")
 
-[node name="MoneyLabel" type="Label" parent="Control"]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
 offset_right = 40.0
@@ -53,6 +49,9 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ConejosBuyButton_x100" type="Button" parent="Control/VBoxContainer/ConejosBuyButtons"]
+layout_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
 
 [connection signal="pressed" from="Control/VBoxContainer/ConejosBuyButtons/ConejosBuyButton_x1" to="Control" method="_on_conejos_buy_button_x_1_pressed"]
