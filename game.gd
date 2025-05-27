@@ -78,16 +78,16 @@ func check_speed_threshold(animal_name):
 			print(animal_name, " speed increased! New sale time: ", animal.current_sale_time) # Replace with UI notification
 
 # Functions for each Conejos buy button
-func _on_ConejosBuyButton_x1_pressed():
+func _on_conejos_buy_button_x_1_pressed():
 	buy_animal("Conejos", 1)
 
-func _on_ConejosBuyButton_x5_pressed():
+func _on_conejos_buy_button_x_5_pressed():
 	buy_animal("Conejos", 5)
 
-func _on_ConejosBuyButton_x10_pressed():
+func _on_conejos_buy_button_x_10_pressed():
 	buy_animal("Conejos", 10)
 
-func _on_ConejosBuyButton_x100_pressed():
+func _on_conejos_buy_button_x_100_pressed():
 	buy_animal("Conejos", 100)
 
 # Example buy functions for other animals (connect these to buttons)
