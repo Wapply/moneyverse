@@ -16,11 +16,11 @@ var animals = {
 	"Elefantes": {"price": 5000, "quantity": 0, "sale_time": 60, "current_sale_time": 60, "base_price": 5000, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0}
 }
 
-@onready var money_label = get_node("VBoxContainer/MoneyLabel")
-@onready var conejos_sale_info_label = get_node("VBoxContainer/ConejosSaleInfoLabel")
-@onready var quantity_button = get_node("VBoxContainer/QuantityButton") # Reference to the Quantity Button
+@onready var money_label = get_node("VBoxContainer/PanelContainer/MoneyLabel")
+@onready var conejos_sale_info_label = get_node("VBoxContainer/PanelContainer/ConejosSaleInfoLabel")
+@onready var quantity_button = get_node("VBoxContainer/PanelContainer/ConejosQuantityLabel") # Reference to the Quantity Button
 
-var quantities = ["1", "10", "100", "MAX"]
+var quantities = [1, 10, 100, "MAX"]
 var quantity_index = 0
 
 func _ready():
@@ -111,6 +111,5 @@ func _on_quantity_button_pressed():
 func update_quantity_button_text():
 	quantity_button.text = "Quantity: " + str(selected_quantity)
 
-#Generic buy function to be connected for all animals
-func _on_animal_buy_button_pressed(animal_name):
-	buy_animal(animal_name)
+func _on_conejos_buy_button_pressed(Conejos):
+	buy_animal(Conejos)

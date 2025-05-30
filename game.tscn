@@ -38,24 +38,31 @@ grow_vertical = 2
 
 [node name="QuantityButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
+autowrap_mode = 2
 
-[node name="ConejosNameLabel" type="Label" parent="Control/VBoxContainer"]
+[node name="PanelContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
 layout_mode = 2
 
-[node name="ConejosQuantityLabel" type="Label" parent="Control/VBoxContainer"]
+[node name="ConejosNameLabel" type="Label" parent="Control/VBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="ConejosSaleInfoLabel" type="Label" parent="Control/VBoxContainer"]
+[node name="ConejosQuantityLabel" type="Label" parent="Control/VBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="MoneyLabel" type="Label" parent="Control/VBoxContainer"]
+[node name="ConejosSaleInfoLabel" type="Label" parent="Control/VBoxContainer/PanelContainer"]
 layout_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="Control/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="ConejosBuyButtons" type="HBoxContainer" parent="Control/VBoxContainer"]
 layout_mode = 2
 
 [node name="ConejosBuyButton" type="Button" parent="Control/VBoxContainer/ConejosBuyButtons"]
 layout_mode = 2
+size_flags_horizontal = 3
+text = "BUY"
 
 [connection signal="pressed" from="Control/VBoxContainer/QuantityButton" to="Control" method="_on_quantity_button_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/ConejosBuyButtons/ConejosBuyButton" to="Control" method="_on_conejos_buy_button_pressed" binds= ["Conejos"]]
