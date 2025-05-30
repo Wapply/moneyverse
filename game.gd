@@ -1,6 +1,7 @@
 extends Control
 
-var money = 1
+var money = 100
+var selected_quantity = 1 # Default quantity
 
 var animals = {
 	"Conejos": {"price": 1, "quantity": 0, "sale_time": 3, "current_sale_time": 3, "base_price": 1, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
@@ -17,13 +18,17 @@ var animals = {
 
 @onready var money_label = get_node("VBoxContainer/MoneyLabel")
 @onready var conejos_sale_info_label = get_node("VBoxContainer/ConejosSaleInfoLabel")
+@onready var quantity_button = get_node("QuantityButton") # Reference to the Quantity Button
 
-# Removed @onready vars for Conejos buttons as we will connect signals in editor
+
+var quantities = [1, 10, 100, "MAX"]
+var quantity_index = 0
 
 func _ready():
 	update_money_display()
 	setup_animal_timers()
 	update_sale_info_labels()
+	update_quantity_button_text()
 
 func setup_animal_timers():
 	print("Setting up animal timers...")
@@ -41,10 +46,16 @@ func setup_animal_timers():
 		print("Timer set up and started for ", animal_name, " with wait time ", timer.wait_time)
 	print("Animal timer setup complete.")
 
-func buy_animal(animal_name, quantity_to_buy):
+func buy_animal(animal_name):
 	var animal = animals[animal_name]
+	var quantity_to_buy
+	if selected_quantity == "MAX":
+		quantity_to_buy = floor(money / animal.price) # Buy as many as possible
+	else:
+		quantity_to_buy = selected_quantity
+
 	var cost = animal.price * quantity_to_buy
-	if money >= cost:
+	if money >= cost and quantity_to_buy > 0:
 		money -= cost
 		animal.quantity += quantity_to_buy
 		update_money_display()
@@ -55,10 +66,9 @@ func buy_animal(animal_name, quantity_to_buy):
 		# Update the animals dictionary with the new price
 		animals[animal_name]["price"] = animal.price
 		print("Bought ", quantity_to_buy, " ", animal_name, ". Current quantity: ", animal.quantity, ". New price: ", animal.price)
-		update_sale_info_labels() # Update the label
+		update_sale_info_labels()
 	else:
 		print("Not enough money to buy ", quantity_to_buy, " ", animal_name, ". Money: ", money, ", Cost: ", cost)
-
 
 func sell_animal(animal_name):
 	var animal = animals[animal_name]
@@ -69,12 +79,10 @@ func sell_animal(animal_name):
 		print("Sold ", animal.quantity, " ", animal_name, ". Gained: ", animal.base_price * animal.quantity, ". New money: ", money)
 	else:
 		print("No ", animal_name, " to sell.")
-	#update_sale_info_labels() # Update labels after selling
-
+	update_sale_info_labels()
 
 func update_money_display():
 	money_label.text = "Money: $" + str(money)
-
 
 func update_animal_display(animal_name):
 	var animal = animals[animal_name]
@@ -83,7 +91,6 @@ func update_animal_display(animal_name):
 
 func update_sale_info_labels():
 	conejos_sale_info_label.text = "Sale Price: $" + str(animals["Conejos"]["price"])
-
 
 func check_speed_threshold(animal_name):
 	var animal = animals[animal_name]
@@ -96,56 +103,17 @@ func check_speed_threshold(animal_name):
 			animal.current_threshold_index += 1
 			print(animal_name, " speed increased! New sale time: ", animal.current_sale_time)  # Replace with UI notification
 
+func _on_quantity_button_pressed():
+	quantity_index = (quantity_index + 1) % quantities.size()
+	selected_quantity = quantities[quantity_index]
+	update_quantity_button_text()
+	print("Selected quantity: ", selected_quantity)
 
-# Functions for each Conejos buy button
-func _on_conejos_buy_button_x_1_pressed():
-	buy_animal("Conejos", 1)
+func update_quantity_button_text():
+	quantity_button.text = "Quantity: " + str(selected_quantity)
 
-
-func _on_conejos_buy_button_x_5_pressed():
-	buy_animal("Conejos", 5)
-
-
-func _on_conejos_buy_button_x_10_pressed():
-	buy_animal("Conejos", 10)
-
-
-func _on_conejos_buy_button_x_100_pressed():
-	buy_animal("Conejos", 100)
+#Generic buy function to be connected for all animals
+func _on_animal_buy_button_pressed(animal_name):
+	buy_animal(animal_name)
 
 
-# Example buy functions for other animals (connect these to buttons)
-func _on_GallinasBuyButton_pressed(quantity):
-	buy_animal("Gallinas", quantity)
-
-
-func _on_CerdosBuyButton_pressed(quantity):
-	buy_animal("Cerdos", quantity)
-
-
-func _on_CaballosBuyButton_pressed(quantity):
-	buy_animal("Caballos", quantity)
-
-
-func _on_VacasBuyButton_pressed(quantity):
-	buy_animal("Vacas", quantity)
-
-
-func _on_PerrosBuyButton_pressed(quantity):
-	buy_animal("Perros", quantity)
-
-
-func _on_GatosBuyButton_pressed(quantity):
-	buy_animal("Gatos", quantity)
-
-
-func _on_AguilasBuyButton_pressed(quantity):
-	buy_animal("Águilas", quantity)
-
-
-func _on_OsosBuyButton_pressed(quantity):
-	buy_animal("Osos", quantity)
-
-
-func _on_ElefantesBuyButton_pressed(quantity):
-	buy_animal("Elefantes", quantity)
