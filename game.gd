@@ -112,7 +112,5 @@ func _on_quantity_button_pressed():
 func update_quantity_button_text():
 	quantity_button.text = "Quantity: " + str(selected_quantity)
 
-#Generic buy function to be connected for all animals
-func _on_animal_buy_button_pressed(animal_name):
-	buy_animal(animal_name)
-	
+func _on_conejos_buy_button_pressed(Conejos):
+	buy_animal(Conejos)

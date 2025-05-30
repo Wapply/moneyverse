@@ -56,3 +56,6 @@ layout_mode = 2
 
 [node name="ConejosBuyButton" type="Button" parent="Control/VBoxContainer/ConejosBuyButtons"]
 layout_mode = 2
+
+[connection signal="pressed" from="Control/VBoxContainer/QuantityButton" to="Control" method="_on_quantity_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/ConejosBuyButtons/ConejosBuyButton" to="Control" method="_on_conejos_buy_button_pressed" binds= ["Conejos"]]
