@@ -3,15 +3,15 @@ extends Control
 var money = 1
 
 var animals = {
-	"Conejos": {"price": 1, "quantity": 0, "sale_time": 3, "current_sale_time": 3, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
-	"Gallinas": {"price": 5, "quantity": 0, "sale_time": 5, "current_sale_time": 5, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
-	"Cerdos": {"price": 10, "quantity": 0, "sale_time": 7, "current_sale_time": 7, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
-	"Caballos": {"price": 20, "quantity": 0, "sale_time": 10, "current_sale_time": 10, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
-	"Vacas": {"price": 50, "quantity": 0, "sale_time": 15, "current_sale_time": 15, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
-	"Perros": {"price": 100, "quantity": 0, "sale_time": 20, "current_sale_time": 20, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
-	"Gatos": {"price": 200, "quantity": 0, "sale_time": 25, "current_sale_time": 25, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
-	"Águilas": {"price": 500, "quantity": 0, "sale_time": 30, "current_sale_time": 30, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
-	"Osos": {"price": 1000, "quantity": 0, "sale_time": 35, "current_sale_time": 35, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
+	"Conejos": {"price": 1, "quantity": 0, "sale_time": 3, "current_sale_time": 3, "base_price": 1, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
+	"Gallinas": {"price": 5, "quantity": 0, "sale_time": 5, "current_sale_time": 5, "base_price": 5, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
+	"Cerdos": {"price": 10, "quantity": 0, "sale_time": 7, "current_sale_time": 7, "base_price": 10, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
+	"Caballos": {"price": 20, "quantity": 0, "sale_time": 10, "current_sale_time": 10, "base_price": 20, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
+	"Vacas": {"price": 50, "quantity": 0, "sale_time": 15, "current_sale_time": 15, "base_price": 50, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
+	"Perros": {"price": 100, "quantity": 0, "sale_time": 20, "current_sale_time": 20, "base_price": 100, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
+	"Gatos": {"price": 200, "quantity": 0, "sale_time": 25, "current_sale_time": 25, "base_price": 200, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
+	"Águilas": {"price": 500, "quantity": 0, "sale_time": 30, "current_sale_time": 30, "base_price": 500, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
+	"Osos": {"price": 1000, "quantity": 0, "sale_time": 35, "current_sale_time": 35, "base_price": 1000, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
 	"Elefantes": {"price": 5000, "quantity": 0, "sale_time": 60, "current_sale_time": 60, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0}
 }
 
@@ -49,11 +49,10 @@ func buy_animal(animal_name, quantity_to_buy):
 		update_animal_display(animal_name)
 		check_speed_threshold(animal_name)
 
-		# Increase the animal's price by 7%
+		# Increase the animal's price by 7% (ONLY for buying)
 		animal.price *= 1.07
 		# Update the animals dictionary with the new price
 		animals[animal_name]["price"] = animal.price
-
 		print("Bought ", quantity_to_buy, " ", animal_name, ". Current quantity: ", animal.quantity, ". New price: ", animal.price)
 	else:
 		print("Not enough money to buy ", quantity_to_buy, " ", animal_name, ". Money: ", money, ", Cost: ", cost)
@@ -62,9 +61,9 @@ func sell_animal(animal_name):
 	var animal = animals[animal_name]
 	print("Attempting to sell ", animal_name, ". Quantity: ", animal.quantity)
 	if animal.quantity > 0:
-		money += animal.price * animal.quantity
+		money += animal.base_price * animal.quantity # Use base_price for selling
 		update_money_display()
-		print("Sold ", animal.quantity, " ", animal_name, ". Gained: ", animal.price * animal.quantity, ". New money: ", money)
+		print("Sold ", animal.quantity, " ", animal_name, ". Gained: ", animal.base_price * animal.quantity, ". New money: ", money)
 	else:
 		print("No ", animal_name, " to sell.")
 
