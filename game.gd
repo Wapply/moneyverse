@@ -18,8 +18,7 @@ var animals = {
 
 @onready var money_label = get_node("VBoxContainer/MoneyLabel")
 @onready var conejos_sale_info_label = get_node("VBoxContainer/ConejosSaleInfoLabel")
-@onready var quantity_button = get_node("QuantityButton") # Reference to the Quantity Button
-
+@onready var quantity_button = get_node("VBoxContainer/QuantityButton") # Reference to the Quantity Button
 
 var quantities = [1, 10, 100, "MAX"]
 var quantity_index = 0
@@ -49,7 +48,7 @@ func setup_animal_timers():
 func buy_animal(animal_name):
 	var animal = animals[animal_name]
 	var quantity_to_buy
-	if selected_quantity == "MAX":
+	if str(selected_quantity) == "MAX":
 		quantity_to_buy = floor(money / animal.price) # Buy as many as possible
 	else:
 		quantity_to_buy = selected_quantity
