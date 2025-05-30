@@ -20,7 +20,7 @@ var animals = {
 @onready var conejos_sale_info_label = get_node("VBoxContainer/ConejosSaleInfoLabel")
 @onready var quantity_button = get_node("VBoxContainer/QuantityButton") # Reference to the Quantity Button
 
-var quantities = [1, 10, 100, "MAX"]
+var quantities = ["1", "10", "100", "MAX"]
 var quantity_index = 0
 
 func _ready():
@@ -61,7 +61,7 @@ func buy_animal(animal_name):
 		update_animal_display(animal_name)
 		check_speed_threshold(animal_name)
 		# Increase the animal's price by 7% (ONLY for buying)
-		animal.price *= 1.07
+		animal.price *=  1.07
 		# Update the animals dictionary with the new price
 		animals[animal_name]["price"] = animal.price
 		print("Bought ", quantity_to_buy, " ", animal_name, ". Current quantity: ", animal.quantity, ". New price: ", animal.price)
@@ -111,5 +111,6 @@ func _on_quantity_button_pressed():
 func update_quantity_button_text():
 	quantity_button.text = "Quantity: " + str(selected_quantity)
 
-func _on_conejos_buy_button_pressed(Conejos):
-	buy_animal(Conejos)
+#Generic buy function to be connected for all animals
+func _on_animal_buy_button_pressed(animal_name):
+	buy_animal(animal_name)
