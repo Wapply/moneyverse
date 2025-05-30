@@ -1,6 +1,6 @@
 extends Control
 
-var money = 5
+var money = 1
 
 var animals = {
 	"Conejos": {"price": 1, "quantity": 0, "sale_time": 3, "current_sale_time": 3, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0},
