@@ -40,21 +40,21 @@ grow_vertical = 2
 layout_mode = 2
 autowrap_mode = 2
 
-[node name="PanelContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="ConejosNameLabel" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
 
-[node name="ConejosNameLabel" type="Label" parent="Control/VBoxContainer/PanelContainer"]
+[node name="ConejosQuantityLabel" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
 
-[node name="ConejosQuantityLabel" type="Label" parent="Control/VBoxContainer/PanelContainer"]
+[node name="ConejosSaleInfoLabel" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
 
-[node name="ConejosSaleInfoLabel" type="Label" parent="Control/VBoxContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="MoneyLabel" type="Label" parent="Control/VBoxContainer/PanelContainer"]
+[node name="MoneyLabel" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+
+[node name="PanelContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
 
 [node name="ConejosBuyButtons" type="HBoxContainer" parent="Control/VBoxContainer"]
 layout_mode = 2
