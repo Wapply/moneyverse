@@ -18,9 +18,9 @@ var animals = {
 
 @onready var money_label = get_node("VBoxContainer/PanelContainer/MoneyLabel")
 @onready var conejos_sale_info_label = get_node("VBoxContainer/PanelContainer/ConejosSaleInfoLabel")
-@onready var quantity_button = get_node("VBoxContainer/PanelContainer/ConejosQuantityLabel") # Reference to the Quantity Button
+@onready var quantity_button = get_node("VBoxContainer/QuantityButton") # Reference to the Quantity Button
 
-var quantities = [1, 10, 100, "MAX"]
+var quantities = ["1", "10", "100", "MAX"]
 var quantity_index = 0
 
 func _ready():
@@ -111,5 +111,6 @@ func _on_quantity_button_pressed():
 func update_quantity_button_text():
 	quantity_button.text = "Quantity: " + str(selected_quantity)
 
-func _on_conejos_buy_button_pressed(Conejos):
-	buy_animal(Conejos)
+#Generic buy function to be connected for all animals
+func _on_animal_buy_button_pressed(animal_name):
+	buy_animal(animal_name)
