@@ -61,7 +61,7 @@ func buy_animal(animal_name):
 		update_animal_display(animal_name)
 		check_speed_threshold(animal_name)
 		# Increase the animal's price by 7% (ONLY for buying)
-		animal.price *=  1.07
+		animal.price *= 1.07
 		# Update the animals dictionary with the new price
 		animals[animal_name]["price"] = animal.price
 		print("Bought ", quantity_to_buy, " ", animal_name, ". Current quantity: ", animal.quantity, ". New price: ", animal.price)
