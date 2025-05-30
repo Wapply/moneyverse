@@ -55,6 +55,7 @@ func buy_animal(animal_name, quantity_to_buy):
 		# Update the animals dictionary with the new price
 		animals[animal_name]["price"] = animal.price
 		print("Bought ", quantity_to_buy, " ", animal_name, ". Current quantity: ", animal.quantity, ". New price: ", animal.price)
+		update_sale_info_labels() # Update the label
 	else:
 		print("Not enough money to buy ", quantity_to_buy, " ", animal_name, ". Money: ", money, ", Cost: ", cost)
 
@@ -68,7 +69,7 @@ func sell_animal(animal_name):
 		print("Sold ", animal.quantity, " ", animal_name, ". Gained: ", animal.base_price * animal.quantity, ". New money: ", money)
 	else:
 		print("No ", animal_name, " to sell.")
-	update_sale_info_labels() # Update labels after selling
+	#update_sale_info_labels() # Update labels after selling
 
 
 func update_money_display():
@@ -81,7 +82,7 @@ func update_animal_display(animal_name):
 	quantity_label.text = str(animal.quantity)
 
 func update_sale_info_labels():
-	conejos_sale_info_label.text = "Sale Price: $" + str(animals["Conejos"]["base_price"])
+	conejos_sale_info_label.text = "Sale Price: $" + str(animals["Conejos"]["price"])
 
 
 func check_speed_threshold(animal_name):
