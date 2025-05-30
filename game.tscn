@@ -36,6 +36,9 @@ offset_bottom = 164.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="QuantityButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+
 [node name="ConejosNameLabel" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
 
@@ -45,25 +48,11 @@ layout_mode = 2
 [node name="ConejosSaleInfoLabel" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
 
-[node name="ConejosBuyButtons" type="HBoxContainer" parent="Control/VBoxContainer"]
-layout_mode = 2
-
-[node name="ConejosBuyButton_x1" type="Button" parent="Control/VBoxContainer/ConejosBuyButtons"]
-layout_mode = 2
-
-[node name="ConejosBuyButton_x5" type="Button" parent="Control/VBoxContainer/ConejosBuyButtons"]
-layout_mode = 2
-
-[node name="ConejosBuyButton_x10" type="Button" parent="Control/VBoxContainer/ConejosBuyButtons"]
-layout_mode = 2
-
-[node name="ConejosBuyButton_x100" type="Button" parent="Control/VBoxContainer/ConejosBuyButtons"]
-layout_mode = 2
-
 [node name="MoneyLabel" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
 
-[connection signal="pressed" from="Control/VBoxContainer/ConejosBuyButtons/ConejosBuyButton_x1" to="Control" method="_on_conejos_buy_button_x_1_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/ConejosBuyButtons/ConejosBuyButton_x5" to="Control" method="_on_conejos_buy_button_x_5_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/ConejosBuyButtons/ConejosBuyButton_x10" to="Control" method="_on_conejos_buy_button_x_10_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/ConejosBuyButtons/ConejosBuyButton_x100" to="Control" method="_on_conejos_buy_button_x_100_pressed"]
+[node name="ConejosBuyButtons" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="ConejosBuyButton" type="Button" parent="Control/VBoxContainer/ConejosBuyButtons"]
+layout_mode = 2
