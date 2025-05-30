@@ -48,7 +48,13 @@ func buy_animal(animal_name, quantity_to_buy):
 		update_money_display()
 		update_animal_display(animal_name)
 		check_speed_threshold(animal_name)
-		print("Bought ", quantity_to_buy, " ", animal_name, ". Current quantity: ", animal.quantity)
+
+		# Increase the animal's price by 7%
+		animal.price *= 1.07
+		# Update the animals dictionary with the new price
+		animals[animal_name]["price"] = animal.price
+
+		print("Bought ", quantity_to_buy, " ", animal_name, ". Current quantity: ", animal.quantity, ". New price: ", animal.price)
 	else:
 		print("Not enough money to buy ", quantity_to_buy, " ", animal_name, ". Money: ", money, ", Cost: ", cost)
 
