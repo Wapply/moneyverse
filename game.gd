@@ -89,7 +89,10 @@ func update_animal_display(animal_name):
 	quantity_label.text = str(animal.quantity)
 
 func update_sale_info_labels():
-	conejos_sale_info_label.text = "Sale Price: $" + str(animals["Conejos"]["price"])
+	if conejos_sale_info_label != null:
+		conejos_sale_info_label.text = "Sale Price: $" + str(animals["Conejos"]["price"])
+	else:
+		print("Error: ConejosSaleInfoLabel node not found at path 'VBoxContainer/ConejosSaleInfoLabel'. Please check your scene structure.")
 
 func check_speed_threshold(animal_name):
 	var animal = animals[animal_name]
