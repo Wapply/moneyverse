@@ -1,6 +1,6 @@
 extends Control
 
-var money = 100
+var money = 1
 var selected_quantity = 1 # Default quantity
 
 var animals = {
@@ -18,7 +18,7 @@ var animals = {
 
 @onready var money_label = get_node("VBoxContainer/MoneyLabel")
 @onready var conejos_sale_info_label = get_node("VBoxContainer/ConejosSaleInfoLabel")
-@onready var quantity_button = get_node("QuantityButton") # Reference to the Quantity Button
+@onready var quantity_button = get_node("VBoxContainer/QuantityButton") # Reference to the Quantity Button
 
 var quantities = [1, 10, 100, "MAX"]
 var quantity_index = 0
