@@ -1,6 +1,6 @@
 extends Control
 
-var money = 1 # Start with some money
+var money = 100 # Start with some money
 var selected_quantity = 1 # Default quantity
 
 var animals = {
@@ -86,7 +86,10 @@ func setup_animal_timers():
 			timer.wait_time = animals[animal_name]["current_sale_time"]
 			timer.autostart = true # Timer will start after its wait_time is first set
 			# Connect with a Callable to pass animal_name
-			timer.timeout.connect(Callable(self, "sell_animal").bind(animal_name))
+			if timer.timeout.connect(Callable(self, "sell_animal").bind(animal_name)) == OK:
+				print("Timer connection successful for ", animal_name)
+			else:
+				print("Timer connection failed for ", animal_name)
 			# Timer starts automatically due to autostart=true once it's added to scene tree and wait_time is set.
 			# If it needs to be started explicitly or restarted with new time: timer.start()
 			print("Timer set up for ", animal_name, " with wait time ", timer.wait_time)
