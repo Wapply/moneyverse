@@ -40,57 +40,76 @@ func initialize_animal_nodes():
 
 	if not column1_node:
 		printerr("Error: Node 'AnimalsContainer/Column1' not found.")
+		return # Exit if the node is not found
+
 	if not column2_node:
 		printerr("Error: Node 'AnimalsContainer/Column2' not found.")
+		return
 
-	var animal_names = animals.keys()
-
-	for i in range(animal_names.size()):
-		var animal_name = animal_names[i]
-		var parent_column_node_for_this_animal 
-		
-		if i < 5: # First 5 animals in the 'animals' dict (indices 0-4) go to Column1
-			parent_column_node_for_this_animal = column1_node
-		else: # The rest go to Column2
-			parent_column_node_for_this_animal = column2_node
-
-		if not parent_column_node_for_this_animal:
-			printerr("Warning: Parent column for '", animal_name, "' not found. Skipping UI setup.")
-			continue
-		
-		# Corrected base path construction for animal UI elements, relative to "Control"
-		var animal_vbox_base_path = "AnimalsContainer/" + parent_column_node_for_this_animal.name + "/" + animal_name
-
-		var name_label_node = get_node_or_null(animal_vbox_base_path + "/TopRow/" + animal_name + "NameLabel")
-		var quantity_label_node = get_node_or_null(animal_vbox_base_path + "/TopRow/" + animal_name + "QuantityLabel")
-		var sale_info_label_node = get_node_or_null(animal_vbox_base_path + "/BottomRow/" + animal_name + "SaleInfoLabel")
-		var buy_button_node = get_node_or_null(animal_vbox_base_path + "/BottomRow/" + animal_name + "BuyButton")
-		
-		# Store nodes (or null if not found)
-		animal_labels[animal_name + "NameLabel"] = name_label_node
-		animal_labels[animal_name + "QuantityLabel"] = quantity_label_node
-		animal_labels[animal_name + "SaleInfoLabel"] = sale_info_label_node
-		animal_buy_buttons[animal_name + "BuyButton"] = buy_button_node
-
-		if not name_label_node or not quantity_label_node or not sale_info_label_node or not buy_button_node:
-			# This will log for "Gallinas" as its UI isn't at the expected path
-			printerr("Warning: Some UI elements for animal '", animal_name, "' were not found at base path '", animal_vbox_base_path, "'. Check scene structure if this animal should be visible.")
-		
-func setup_animal_timers():
-	print("Setting up animal timers...")
+	# Initialize labels and buttons for each animal
 	for animal_name in animals:
-		if not animals[animal_name].has("timer") or animals[animal_name]["timer"] == null: # Ensure timer is not already set up if this can be called multiple times
-			var timer = Timer.new()
-			animals[animal_name]["timer"] = timer
-			timer.wait_time = animals[animal_name]["current_sale_time"]
-			timer.autostart = true # Timer will start after its wait_time is first set
-			timer.timeout.connect(Callable(self, "sell_animal").bind(animal_name))
-			# Use call_deferred to add the timer as a child in a deferred manner
-			call_deferred("add_child", timer)
-			print("Timer set up for ", animal_name, " with wait time ", timer.wait_time)
+		# Construct the base path to the animal's UI elements
+		var base_path = "AnimalsContainer/Column1/" + animal_name  # Assumes animals are under Column1
+		if not has_node(base_path):
+			base_path = "AnimalsContainer/Column2/" + animal_name  # Check Column2 if not in Column1
+			if not has_node(base_path):
+				printerr("Error: Base path not found for animal: ", animal_name)
+				continue # Skip to the next animal if base path is not found in either column
+
+		# Get the label for displaying the quantity of the animal
+		var quantity_label_path = base_path + "/QuantityLabel" # Path to QuantityLabel
+		var quantity_label = get_node_or_null(quantity_label_path)
+		if quantity_label == null:
+			printerr("Error: QuantityLabel not found at path: ", quantity_label_path)
 		else:
-			print("Timer already exists for ", animal_name)
-	print("Animal timer setup complete.")
+			animal_labels[animal_name + "QuantityLabel"] = quantity_label
+
+		# Get the buy button for the animal
+		var buy_button_path = base_path + "/BuyButton" # Path to BuyButton
+		var buy_button = get_node_or_null(buy_button_path)
+		if buy_button == null:
+			printerr("Error: BuyButton not found at path: ", buy_button_path)
+		else:
+			animal_buy_buttons[animal_name + "BuyButton"] = buy_button
+
+
+func setup_animal_timers():
+	for animal_name in animals:
+		var animal = animals[animal_name]
+		animal.timer = Timer.new()
+		add_child(animal.timer)
+		animal.timer.wait_time = animal.sale_time  # Set wait time from the animal's sale_time
+		animal.timer.timeout.connect(sell_animal.bind(animal_name)) # Bind the animal_name to the sell_animal function
+		animal.timer.set_one_shot(false) # Set to auto-restart
+		animal.timer.start()
+
+func update_sale_info_labels():
+	for animal_name in animals:
+		var animal = animals[animal_name]
+		var base_path = "AnimalsContainer/Column1/" + animal_name
+		if not has_node(base_path):
+			base_path = "AnimalsContainer/Column2/" + animal_name
+			if not has_node(base_path):
+				printerr("Error: Base path not found for animal: ", animal_name)
+				continue
+
+		var price_label_path = base_path + "/PriceLabel"
+		var price_label = get_node_or_null(price_label_path)
+		if price_label:
+			price_label.text = "Price: $" + str(animal.price) # Format as needed
+		else:
+			printerr("Error: PriceLabel not found at path: ", price_label_path)
+
+
+
+func update_quantity_button_text():
+	quantity_button.text = "Buy " + str(quantities[quantity_index])
+
+func _on_quantity_button_pressed():
+	quantity_index = (quantity_index + 1) % quantities.size()
+	selected_quantity = quantities[quantity_index]
+	update_quantity_button_text()
+
 
 func buy_animal(animal_name):
 	var animal = animals[animal_name]
@@ -126,7 +145,7 @@ func sell_animal(animal_name): # animal_name is bound from timer
 
 func update_money_display():
 	if money_label: # Check if node exists
-		money_label.text = "Money: $" + str(money)
+		money_label.text = "Money: $" + str("%.2f" % money)
 
 func update_animal_display(animal_name):
 	var animal = animals[animal_name]
@@ -136,33 +155,18 @@ func update_animal_display(animal_name):
 		var quantity_label = animal_labels[quantity_label_key]
 		quantity_label.text = str(animal.quantity)
 
-func update_sale_info_labels():
-	for animal_name in animals:
-		var animal = animals[animal_name]
-		var sale_info_label_key = animal_name + "SaleInfoLabel"
-		if animal_labels.has(sale_info_label_key) and animal_labels[sale_info_label_key] != null:
-			var sale_info_label = animal_labels[sale_info_label_key]
-			sale_info_label.text = "Sale Price: $" + str(int(animal.price)) + " | Time: " + str(round(animal.current_sale_time * 10.0) / 10.0) + "s"
-
 func check_speed_threshold(animal_name):
 	var animal = animals[animal_name]
-	if animal.quantity >= animal.speed_thresholds[min(animal.current_threshold_index, animal.speed_thresholds.size() - 1)]:
-			animal.current_sale_time = max(0.5, animal.current_sale_time / 2.0)
-			if animal.timer != null: # Check if timer exists
-				animal.timer.wait_time = animal.current_sale_time
-				animal.timer.start()  # Restart the timer with the new speed
-			animal.current_threshold_index = min(animal.current_threshold_index + 1, animal.speed_thresholds.size() - 1)
-			update_sale_info_labels() # Sale time changed, so update relevant label
+	# Check if the animal has reached the next speed threshold
+	if animal.current_threshold_index < animal.speed_thresholds.size() and animal.quantity >= animal.speed_thresholds[animal.current_threshold_index]:
+		# Increase the animal's sale speed by reducing the timer wait time
+		animal.sale_time = animal.sale_time * 0.9  # Reduce sale_time by 10%
+		# Ensure the sale_time does not go below a minimum value (e.g., 0.1 seconds)
+		animal.sale_time = max(animal.sale_time, 0.1)
+		# Update the timer with the new wait_time
+		animal.timer.wait_time = animal.sale_time
+		# Move to the next threshold
+		animal.current_threshold_index += 1
+		print(animal_name, " reached speed threshold, new sale_time: ", animal.sale_time)
 
-func _on_quantity_button_pressed():
-	quantity_index = (quantity_index + 1) % quantities.size()
-	selected_quantity = quantities[quantity_index]
-	update_quantity_button_text()
 
-func update_quantity_button_text():
-	if quantity_button: # Check if node exists
-		quantity_button.text = "Quantity: " + str(selected_quantity)
-
-func _on_animal_buy_button_pressed(animal_name):
-	print("_on_animal_buy_button_pressed called with animal_name: ", animal_name)
-	buy_animal(animal_name)
