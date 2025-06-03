@@ -1,6 +1,6 @@
 extends Control
 
-var money = 1
+var money = 1000 # Start with some money
 var selected_quantity = 1 # Default quantity
 
 var animals = {
@@ -16,8 +16,8 @@ var animals = {
 	"Elefantes": {"price": 5000, "quantity": 0, "sale_time": 60, "current_sale_time": 60, "base_price": 5000, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0}
 }
 
-@onready var money_label = get_node("Header/MoneyLabel")
-@onready var quantity_button = get_node("Header/QuantityButton")
+@onready var money_label = get_node("Control/Header/MoneyLabel")
+@onready var quantity_button = get_node("Control/Header/QuantityButton")
 
 var animal_labels = {}
 var animal_buy_buttons = {}
@@ -33,20 +33,20 @@ func _ready():
 	update_quantity_button_text()
 
 func initialize_animal_nodes():
-	var column1 = get_node("AnimalsContainer/Column1")
-	var column2 = get_node("AnimalsContainer/Column2")
+	var column1 = get_node("Control/AnimalsContainer/Column1")
+	var column2 = get_node("Control/AnimalsContainer/Column2")
 
 	var animal_names = animals.keys()
 
 	for i in range(animal_names.size()):
 		var animal_name = animal_names[i]
 		var column = column1 if i < 5 else column2
-		var animal_node_path_base = "AnimalsContainer/" + column.name + "/" + animal_name
+		var animal_node_path = "Control/AnimalsContainer/" + column.name + "/" + animal_name
 
-		animal_labels[animal_name + "NameLabel"] = get_node(animal_node_path_base + "/TopRow/" + animal_name + "NameLabel")
-		animal_labels[animal_name + "QuantityLabel"] = get_node(animal_node_path_base + "/TopRow/" + animal_name + "QuantityLabel")
-		animal_labels[animal_name + "SaleInfoLabel"] = get_node(animal_node_path_base + "/BottomRow/" + animal_name + "SaleInfoLabel")
-		animal_buy_buttons[animal_name + "BuyButton"] = get_node(animal_node_path_base + "/BottomRow/" + animal_name + "BuyButton")
+		animal_labels[animal_name + "NameLabel"] = get_node(animal_node_path + "/TopRow/" + animal_name + "NameLabel")
+		animal_labels[animal_name + "QuantityLabel"] = get_node(animal_node_path + "/TopRow/" + animal_name + "QuantityLabel")
+		animal_labels[animal_name + "SaleInfoLabel"] = get_node(animal_node_path + "/BottomRow/" + animal_name + "SaleInfoLabel")
+		animal_buy_buttons[animal_name + "BuyButton"] = get_node(animal_node_path + "/BottomRow/" + animal_name + "BuyButton")
 
 func setup_animal_timers():
 	print("Setting up animal timers...")
