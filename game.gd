@@ -34,44 +34,27 @@ func _ready():
 	update_quantity_button_text()
 
 func initialize_animal_nodes():
-	# Corrected paths for column nodes, relative to "Control"
-	var column1_node = get_node_or_null("AnimalsContainer/Column1")
-	var column2_node = get_node_or_null("AnimalsContainer/Column2")
-
-	if not column1_node:
-		printerr("Error: Node 'AnimalsContainer/Column1' not found.")
-		return # Exit if the node is not found
-
-	if not column2_node:
-		printerr("Error: Node 'AnimalsContainer/Column2' not found.")
-		return
-
 	# Initialize labels and buttons for each animal
 	for animal_name in animals:
-		# Construct the base path to the animal's UI elements
-		var base_path = "AnimalsContainer/Column1/" + animal_name  # Assumes animals are under Column1
-		if not has_node(base_path):
-			base_path = "AnimalsContainer/Column2/" + animal_name  # Check Column2 if not in Column1
-			if not has_node(base_path):
-				printerr("Error: Base path not found for animal: ", animal_name)
-				continue # Skip to the next animal if base path is not found in either column
+		# Determine the column based on the animal name
+		var column_name = "Column1" if animal_name in ["Conejos", "Gallinas", "Cerdos", "Caballos", "Vacas"] else "Column2"
+		var base_path = "AnimalsContainer/" + column_name + "/" + animal_name
 
-		# Get the label for displaying the quantity of the animal
-		var quantity_label_path = base_path + "/QuantityLabel" # Path to QuantityLabel
+		# Get the quantity label
+		var quantity_label_path = base_path + "/TopRow/" + animal_name + "QuantityLabel"
 		var quantity_label = get_node_or_null(quantity_label_path)
 		if quantity_label == null:
 			printerr("Error: QuantityLabel not found at path: ", quantity_label_path)
 		else:
 			animal_labels[animal_name + "QuantityLabel"] = quantity_label
 
-		# Get the buy button for the animal
-		var buy_button_path = base_path + "/BuyButton" # Path to BuyButton
+		# Get the buy button
+		var buy_button_path = base_path + "/BottomRow/" + animal_name + "BuyButton"
 		var buy_button = get_node_or_null(buy_button_path)
 		if buy_button == null:
 			printerr("Error: BuyButton not found at path: ", buy_button_path)
 		else:
 			animal_buy_buttons[animal_name + "BuyButton"] = buy_button
-
 
 func setup_animal_timers():
 	for animal_name in animals:
@@ -85,22 +68,17 @@ func setup_animal_timers():
 
 func update_sale_info_labels():
 	for animal_name in animals:
-		var animal = animals[animal_name]
-		var base_path = "AnimalsContainer/Column1/" + animal_name
-		if not has_node(base_path):
-			base_path = "AnimalsContainer/Column2/" + animal_name
-			if not has_node(base_path):
-				printerr("Error: Base path not found for animal: ", animal_name)
-				continue
+		# Determine the column based on the animal name
+		var column_name = "Column1" if animal_name in ["Conejos", "Gallinas", "Cerdos", "Caballos", "Vacas"] else "Column2"
+		var base_path = "AnimalsContainer/" + column_name + "/" + animal_name
 
-		var price_label_path = base_path + "/PriceLabel"
-		var price_label = get_node_or_null(price_label_path)
-		if price_label:
-			price_label.text = "Price: $" + str(animal.price) # Format as needed
+		# Get the sale info label
+		var sale_info_label_path = base_path + "/BottomRow/" + animal_name + "SaleInfoLabel"
+		var sale_info_label = get_node_or_null(sale_info_label_path)
+		if sale_info_label:
+			sale_info_label.text = "Price: $" + str(animals[animal_name].price) # Format as needed
 		else:
-			printerr("Error: PriceLabel not found at path: ", price_label_path)
-
-
+			printerr("Error: SaleInfoLabel not found at path: ", sale_info_label_path)
 
 func update_quantity_button_text():
 	quantity_button.text = "Buy " + str(quantities[quantity_index])
@@ -170,3 +148,5 @@ func check_speed_threshold(animal_name):
 		print(animal_name, " reached speed threshold, new sale_time: ", animal.sale_time)
 
 
+func _on_animal_buy_button_pressed(animal_name):
+	buy_animal(animal_name)
