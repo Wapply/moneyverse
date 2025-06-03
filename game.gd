@@ -80,18 +80,10 @@ func setup_animal_timers():
 	print("Setting up animal timers...")
 	for animal_name in animals:
 		if not animals[animal_name].has("timer") or animals[animal_name]["timer"] == null: # Ensure timer is not already set up if this can be called multiple times
-			var timer = Timer.new()
-			add_child(timer) # Add timer as a child of "Control" node
-			animals[animal_name]["timer"] = timer
-			timer.wait_time = animals[animal_name]["current_sale_time"]
-			timer.autostart = true # Timer will start after its wait_time is first set
-			# Connect with a Callable to pass animal_name
-			if timer.timeout.connect(Callable(self, "sell_animal").bind(animal_name)) == OK:
-				print("Timer connection successful for ", animal_name)
-			else:
-				print("Timer connection failed for ", animal_name)
-			# Timer starts automatically due to autostart=true once it's added to scene tree and wait_time is set.
-			# If it needs to be started explicitly or restarted with new time: timer.start()
+			# Use create_timer instead of Timer.new()
+			var timer = create_timer(animals[animal_name]["current_sale_time"])
+			animals[animal_name]["timer"] = timer # Store the timer reference
+			timer.timeout.connect(Callable(self, "sell_animal").bind(animal_name))
 			print("Timer set up for ", animal_name, " with wait time ", timer.wait_time)
 		else:
 			print("Timer already exists for ", animal_name)
@@ -152,7 +144,7 @@ func update_sale_info_labels():
 func check_speed_threshold(animal_name):
 	var animal = animals[animal_name]
 	if animal.current_threshold_index < animal.speed_thresholds.size():
-		var threshold = animal.speed_thresholds[animal.current_threshold_index]
+		var threshold = animal.speed_thresholds[animal.current_threshold_index]!
 		if animal.quantity >= threshold:
 			animal.current_sale_time = max(0.5, animal.current_sale_time / 2.0)
 			if animal.timer != null: # Check if timer exists
