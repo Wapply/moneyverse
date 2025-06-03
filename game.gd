@@ -135,7 +135,7 @@ func update_animal_display(animal_name):
 	var animal = animals[animal_name]
 	var quantity_label_key = animal_name + "QuantityLabel"
 	
-	if animal_labels.has(quantity_label_key) and animal_labels[animal_name]["QuantityLabel"] != null:
+	if animal_labels.has(quantity_label_key) and animal_labels[quantity_label_key] != null:
 		var quantity_label = animal_labels[quantity_label_key]
 		quantity_label.text = "Quantity: " + str(animal.quantity)
 	# else:
@@ -146,7 +146,7 @@ func update_sale_info_labels():
 	for animal_name in animals:
 		var animal = animals[animal_name]
 		var sale_info_label_key = animal_name + "SaleInfoLabel"
-		if animal_labels.has(sale_info_label_key) and animal_labels[animal_name]["SaleInfoLabel"] != null:
+		if animal_labels.has(sale_info_label_key) and animal_labels[sale_info_label_key] != null:
 			var sale_info_label = animal_labels[sale_info_label_key]
 			sale_info_label.text = "Sale Price: $" + str(int(animal.price)) + " | Time: " + str(round(animal.current_sale_time * 10.0) / 10.0) + "s"
 		# else:
