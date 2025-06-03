@@ -129,6 +129,7 @@ func sell_animal(animal_name): # animal_name is bound from timer
 	# No need to update sale info labels here unless selling changes them.
 
 func update_money_display():
+	print("Updating money display. Current money: ", money)
 	if money_label: # Check if node exists
 		money_label.text = "Money: $" + str(money)
 
