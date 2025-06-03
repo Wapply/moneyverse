@@ -107,7 +107,7 @@ func buy_animal(animal_name):
 		update_money_display()
 		update_animal_display(animal_name)
 		check_speed_threshold(animal_name)
-		# Increase the animal's price by 7% (ONLY for buying)
+		# Increase the animal's price by 7% (ONLY for buying) 
 		animal.price = animal.price * 1.07 # Ensure floating point multiplication
 		# Update the animals dictionary with the new price (already done as 'animal' is a reference to dict entry)
 		update_sale_info_labels() # Update all labels as prices might change for others too potentially if logic changes
@@ -118,7 +118,7 @@ func sell_animal(animal_name): # animal_name is bound from timer
 	print("sell_animal called with animal_name: ", animal_name)
 	var animal = animals[animal_name]
 	if animal.quantity > 0:
-		money += animal.base_price * animal.quantity  # Use base_price for selling
+		money += animal.price * animal.quantity  # Use base_price for selling
 		update_money_display()
 	# else: # No need to print if no animals to sell every tick
 		# print("No ", animal_name, " to sell.")
@@ -165,5 +165,6 @@ func update_quantity_button_text():
 	if quantity_button: # Check if node exists
 		quantity_button.text = "Quantity: " + str(selected_quantity)
 
-func _on_conejos_buy_button_pressed(Conejos):
-	buy_animal(Conejos)
+func _on_animal_buy_button_pressed(animal_name):
+	print("_on_animal_buy_button_pressed called with animal_name: ", animal_name)
+	buy_animal(animal_name)
