@@ -146,7 +146,7 @@ func update_sale_info_labels():
 
 func check_speed_threshold(animal_name):
 	var animal = animals[animal_name]
-		if animal.quantity >= animal.speed_thresholds[min(animal.current_threshold_index, animal.speed_thresholds.size() - 1)]:
+	if animal.quantity >= animal.speed_thresholds[min(animal.current_threshold_index, animal.speed_thresholds.size() - 1)]:
 			animal.current_sale_time = max(0.5, animal.current_sale_time / 2.0)
 			if animal.timer != null: # Check if timer exists
 				animal.timer.wait_time = animal.current_sale_time
