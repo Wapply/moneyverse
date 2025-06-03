@@ -164,7 +164,6 @@ func _on_quantity_button_pressed():
 func update_quantity_button_text():
 	if quantity_button: # Check if node exists
 		quantity_button.text = "Quantity: " + str(selected_quantity)
-
-func _on_animal_buy_button_pressed(animal_name):
-	print("_on_animal_buy_button_pressed called with animal_name: ", animal_name)
-	buy_animal(animal_name)
+	
+func _on_conejos_buy_button_pressed(Conejos):
+	buy_animal(Conejos)
