@@ -119,12 +119,14 @@ func sell_animal(animal_name): # animal_name is bound from timer
 	var animal = animals[animal_name]
 	if animal.quantity > 0:
 		money += animal.base_price * animal.quantity  # Use base_price for selling
+		print("Money after selling: ", money)
 		update_money_display()
 	# else: # No need to print if no animals to sell every tick
 		# print("No ", animal_name, " to sell.")
 	# No need to update sale info labels here unless selling changes them.
 
 func update_money_display():
+	print("update_money_display called")
 	if money_label: # Check if node exists
 		money_label.text = "Money: $" + str(money)
 
@@ -164,6 +166,6 @@ func _on_quantity_button_pressed():
 func update_quantity_button_text():
 	if quantity_button: # Check if node exists
 		quantity_button.text = "Quantity: " + str(selected_quantity)
-	
-func _on_conejos_buy_button_pressed(Conejos):
-	buy_animal(Conejos)
+
+func _on_animal_buy_button_pressed(animal_name):
+	buy_animal(animal_name)
