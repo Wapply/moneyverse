@@ -47,7 +47,7 @@ func initialize_animal_nodes():
 		animal_labels[animal_name + "QuantityLabel"] = get_node(animal_node_path + "/TopRow/" + animal_name + "QuantityLabel")
 		animal_labels[animal_name + "SaleInfoLabel"] = get_node(animal_node_path + "/BottomRow/" + animal_name + "SaleInfoLabel")
 		animal_buy_buttons[animal_name + "BuyButton"] = get_node(animal_node_path + "/BottomRow/" + animal_name + "BuyButton")
-
+		
 func setup_animal_timers():
 	print("Setting up animal timers...")
 	for animal_name in animals:

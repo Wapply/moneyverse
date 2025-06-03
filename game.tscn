@@ -362,25 +362,33 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
 
-[node name="Control_Control_AnimalsContainer_Column1#Gallinas" type="VBoxContainer" parent="."]
+[node name="Control_Control_AnimalsContainer_Column1#Gallinas" type="VBoxContainer" parent="Control"]
 
-[node name="Control_AnimalsContainer_Column1_Gallinas#TopRow" type="HBoxContainer" parent="."]
+[node name="Control_AnimalsContainer_Column1_Gallinas#TopRow" type="HBoxContainer" parent="Control"]
 
-[node name="Control_AnimalsContainer_Column1_Gallinas_TopRow#GallinasNameLabel" type="Label" parent="."]
+[node name="Control_AnimalsContainer_Column1_Gallinas_TopRow#GallinasNameLabel" type="Label" parent="Control"]
+offset_right = 62.0
+offset_bottom = 23.0
 size_flags_horizontal = 3
 text = "Gallinas"
 
-[node name="Control_AnimalsContainer_Column1_Gallinas_TopRow#GallinasQuantityLabel" type="Label" parent="."]
+[node name="Control_AnimalsContainer_Column1_Gallinas_TopRow#GallinasQuantityLabel" type="Label" parent="Control"]
+offset_right = 86.0
+offset_bottom = 23.0
 size_flags_horizontal = 3
 text = "Quantity: 0"
 
-[node name="Control_AnimalsContainer_Column1_Gallinas#BottomRow" type="HBoxContainer" parent="."]
+[node name="Control_AnimalsContainer_Column1_Gallinas#BottomRow" type="HBoxContainer" parent="Control"]
 
-[node name="Control_AnimalsContainer_Column1_Gallinas_BottomRow#GallinasSaleInfoLabel" type="Label" parent="."]
+[node name="Control_AnimalsContainer_Column1_Gallinas_BottomRow#GallinasSaleInfoLabel" type="Label" parent="Control"]
+offset_right = 85.0
+offset_bottom = 23.0
 size_flags_horizontal = 3
 text = "Sale Info: $"
 
-[node name="Control_AnimalsContainer_Column1_Gallinas_BottomRow#GallinasBuyButton" type="Button" parent="."]
+[node name="Control_AnimalsContainer_Column1_Gallinas_BottomRow#GallinasBuyButton" type="Button" parent="Control"]
+offset_right = 40.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 text = "BUY"
 
