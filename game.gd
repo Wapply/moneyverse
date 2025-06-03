@@ -101,7 +101,6 @@ func buy_animal(animal_name):
 		quantity_to_buy = selected_quantity
 
 	var cost = animal.price * quantity_to_buy
-	print("Money: ", money, ", Price: ", animal.price, ", Quantity: ", quantity_to_buy, ", Cost: ", cost)
 	if money >= cost and quantity_to_buy > 0:
 		money -= cost
 		animal.quantity += quantity_to_buy
@@ -111,25 +110,21 @@ func buy_animal(animal_name):
 		# Increase the animal's price by 7% (ONLY for buying)
 		animal.price = animal.price * 1.07 # Ensure floating point multiplication
 		# Update the animals dictionary with the new price (already done as 'animal' is a reference to dict entry)
-		print("Bought ", quantity_to_buy, " ", animal_name, ". Current quantity: ", animal.quantity, ". New price: ", animal.price)
 		update_sale_info_labels() # Update all labels as prices might change for others too potentially if logic changes
 	else:
 		print("Not enough money to buy ", quantity_to_buy, " ", animal_name, ". Money: ", money, ", Cost: ", cost)
 
 func sell_animal(animal_name): # animal_name is bound from timer
+	print("sell_animal called with animal_name: ", animal_name)
 	var animal = animals[animal_name]
-	print("Attempting to sell ", animal_name, ". Quantity: ", animal.quantity)
-	print("Selling: ", animal_name, ", Quantity: ", animal.quantity, ", Base Price: ", animal.base_price)
 	if animal.quantity > 0:
 		money += animal.base_price * animal.quantity  # Use base_price for selling
 		update_money_display()
-		print("Sold ", animal.quantity, " ", animal_name, ". Gained: ", animal.base_price * animal.quantity, ". New money: ", money)
 	# else: # No need to print if no animals to sell every tick
 		# print("No ", animal_name, " to sell.")
 	# No need to update sale info labels here unless selling changes them.
 
 func update_money_display():
-	print("Updating money display. Current money: ", money)
 	if money_label: # Check if node exists
 		money_label.text = "Money: $" + str(money)
 
@@ -140,9 +135,6 @@ func update_animal_display(animal_name):
 	if animal_labels.has(quantity_label_key) and animal_labels[quantity_label_key] != null:
 		var quantity_label = animal_labels[quantity_label_key]
 		quantity_label.text = "Quantity: " + str(animal.quantity)
-	# else:
-		# printerr("Warning: QuantityLabel node not found for '", animal_name, "' during update_animal_display.")
-
 
 func update_sale_info_labels():
 	for animal_name in animals:
@@ -151,9 +143,6 @@ func update_sale_info_labels():
 		if animal_labels.has(sale_info_label_key) and animal_labels[sale_info_label_key] != null:
 			var sale_info_label = animal_labels[sale_info_label_key]
 			sale_info_label.text = "Sale Price: $" + str(int(animal.price)) + " | Time: " + str(round(animal.current_sale_time * 10.0) / 10.0) + "s"
-		# else:
-			# printerr("Warning: SaleInfoLabel node not found for '", animal_name, "' during update_sale_info_labels.")
-
 
 func check_speed_threshold(animal_name):
 	var animal = animals[animal_name]
@@ -165,18 +154,17 @@ func check_speed_threshold(animal_name):
 				animal.timer.wait_time = animal.current_sale_time
 				animal.timer.start()  # Restart the timer with the new speed
 			animal.current_threshold_index += 1
-			print(animal_name, " speed increased! New sale time: ", animal.current_sale_time)
 			update_sale_info_labels() # Sale time changed, so update relevant label
 
 func _on_quantity_button_pressed():
 	quantity_index = (quantity_index + 1) % quantities.size()
 	selected_quantity = quantities[quantity_index]
 	update_quantity_button_text()
-	print("Selected quantity: ", selected_quantity)
 
 func update_quantity_button_text():
 	if quantity_button: # Check if node exists
 		quantity_button.text = "Quantity: " + str(selected_quantity)
 
 func _on_animal_buy_button_pressed(animal_name):
+	print("_on_animal_buy_button_pressed called with animal_name: ", animal_name)
 	buy_animal(animal_name)
