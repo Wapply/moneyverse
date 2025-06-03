@@ -76,7 +76,7 @@ func update_sale_info_labels():
 		var sale_info_label_path = base_path + "/BottomRow/" + animal_name + "SaleInfoLabel"
 		var sale_info_label = get_node_or_null(sale_info_label_path)
 		if sale_info_label:
-			sale_info_label.text = "Price: $" + str(animals[animal_name].price) # Format as needed
+			sale_info_label.text = "Price: $" + str("%.2f" % animals[animal_name].price) # Format as needed
 		else:
 			printerr("Error: SaleInfoLabel not found at path: ", sale_info_label_path)
 
