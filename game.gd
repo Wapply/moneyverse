@@ -90,6 +90,8 @@ func setup_animal_timers():
 			# Timer starts automatically due to autostart=true once it's added to scene tree and wait_time is set.
 			# If it needs to be started explicitly or restarted with new time: timer.start()
 			print("Timer set up for ", animal_name, " with wait time ", timer.wait_time)
+		else:
+			print("Timer already exists for ", animal_name)
 	print("Animal timer setup complete.")
 
 func buy_animal(animal_name):
