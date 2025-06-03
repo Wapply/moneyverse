@@ -392,7 +392,8 @@ size_flags_horizontal = 3
 text = "BUY"
 
 [connection signal="pressed" from="Control/Header/QuantityButton" to="Control" method="_on_quantity_button_pressed"]
-[connection signal="pressed" from="Control/AnimalsContainer/Column1/Conejos/BottomRow/ConejosBuyButton" to="Control" method="_on_conejos_buy_button_pressed" binds= ["Conejos"]]
+[connection signal="pressed" from="Control/AnimalsContainer/Column1/Conejos/BottomRow/ConejosBuyButton" to="Control" method="_on_animal_buy_button_pressed" binds= ["Conejos"]]
+[connection signal="pressed" from="Control/AnimalsContainer/Column1/Gallinas/BottomRow/GallinasBuyButton" to="Control" method="_on_animal_buy_button_pressed" binds= ["Gallinas"]]
 [connection signal="pressed" from="Control/AnimalsContainer/Column1/Cerdos/BottomRow/CerdosBuyButton" to="Control" method="_on_animal_buy_button_pressed" binds= ["Cerdos"]]
 [connection signal="pressed" from="Control/AnimalsContainer/Column1/Caballos/BottomRow/CaballosBuyButton" to="Control" method="_on_animal_buy_button_pressed" binds= ["Caballos"]]
 [connection signal="pressed" from="Control/AnimalsContainer/Column1/Vacas/BottomRow/VacasBuyButton" to="Control" method="_on_animal_buy_button_pressed" binds= ["Vacas"]]
