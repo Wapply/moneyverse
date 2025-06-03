@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dykkphgnix3in" path="res://game.gd" id="1_80nbo"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwb40"]
-bg_color = Color(0.151276, 0.151276, 0.151276, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_80nbo"]
+bg_color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="game" type="Node"]
 
@@ -13,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_mwb40")
+theme_override_styles/panel = SubResource("StyleBoxFlat_80nbo")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -24,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_80nbo")
 
-[node name="Header" type="VBoxContainer" parent="Control"]
+[node name="Header" type="HBoxContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -33,11 +33,16 @@ grow_horizontal = 2
 
 [node name="MoneyLabel" type="Label" parent="Control/Header"]
 layout_mode = 2
-text = "DINERO BILLION"
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "MONEY"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="QuantityButton" type="Button" parent="Control/Header"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Quantity: 1"
 
 [node name="ColumnHeader" type="HBoxContainer" parent="Control"]
@@ -48,60 +53,31 @@ offset_top = 100.0
 offset_bottom = 140.0
 grow_horizontal = 2
 
-[node name="SpacerLeft" type="Control" parent="Control/ColumnHeader"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Column1Header" type="HBoxContainer" parent="Control/ColumnHeader"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ProductoLabel1" type="Label" parent="Control/ColumnHeader/Column1Header"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "PRODUCTO"
-
-[node name="VelocidadGananciaLabel1" type="Label" parent="Control/ColumnHeader/Column1Header"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "VELOCIDAD DE VENTA + GANANCIA"
-
-[node name="Column2Header" type="HBoxContainer" parent="Control/ColumnHeader"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ProductoLabel2" type="Label" parent="Control/ColumnHeader/Column2Header"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "PRODUCTO"
-
-[node name="VelocidadGananciaLabel2" type="Label" parent="Control/ColumnHeader/Column2Header"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "VELOCIDAD DE VENTA + GANANCIA"
-
-[node name="SpacerRight" type="Control" parent="Control/ColumnHeader"]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="AnimalsContainer" type="HBoxContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 140.0
+offset_top = 168.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="SpacerLeft" type="Control" parent="Control/AnimalsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.85
 
 [node name="Column1" type="VBoxContainer" parent="Control/AnimalsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Conejos" type="VBoxContainer" parent="Control/AnimalsContainer/Column1"]
+[node name="Conejos" type="HBoxContainer" parent="Control/AnimalsContainer/Column1"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TopRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Conejos"]
+[node name="TopRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column1/Conejos"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ConejosNameLabel" type="Label" parent="Control/AnimalsContainer/Column1/Conejos/TopRow"]
 layout_mode = 2
@@ -113,8 +89,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quantity: 0"
 
-[node name="BottomRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Conejos"]
+[node name="BottomRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column1/Conejos"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ConejosSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column1/Conejos/BottomRow"]
 layout_mode = 2
@@ -126,11 +103,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
 
-[node name="Gallinas" type="VBoxContainer" parent="Control/AnimalsContainer/Column1"]
+[node name="Gallinas" type="HBoxContainer" parent="Control/AnimalsContainer/Column1"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TopRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Gallinas"]
+[node name="TopRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column1/Gallinas"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="GallinasNameLabel" type="Label" parent="Control/AnimalsContainer/Column1/Gallinas/TopRow"]
 layout_mode = 2
@@ -142,8 +121,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quantity: 0"
 
-[node name="BottomRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Gallinas"]
+[node name="BottomRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column1/Gallinas"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="GallinasSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column1/Gallinas/BottomRow"]
 layout_mode = 2
@@ -155,11 +135,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
 
-[node name="Cerdos" type="VBoxContainer" parent="Control/AnimalsContainer/Column1"]
+[node name="Cerdos" type="HBoxContainer" parent="Control/AnimalsContainer/Column1"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TopRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Cerdos"]
+[node name="TopRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column1/Cerdos"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="CerdosNameLabel" type="Label" parent="Control/AnimalsContainer/Column1/Cerdos/TopRow"]
 layout_mode = 2
@@ -171,8 +153,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quantity: 0"
 
-[node name="BottomRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Cerdos"]
+[node name="BottomRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column1/Cerdos"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="CerdosSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column1/Cerdos/BottomRow"]
 layout_mode = 2
@@ -184,11 +167,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
 
-[node name="Caballos" type="VBoxContainer" parent="Control/AnimalsContainer/Column1"]
+[node name="Caballos" type="HBoxContainer" parent="Control/AnimalsContainer/Column1"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TopRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Caballos"]
+[node name="TopRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column1/Caballos"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="CaballosNameLabel" type="Label" parent="Control/AnimalsContainer/Column1/Caballos/TopRow"]
 layout_mode = 2
@@ -200,8 +185,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quantity: 0"
 
-[node name="BottomRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Caballos"]
+[node name="BottomRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column1/Caballos"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="CaballosSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column1/Caballos/BottomRow"]
 layout_mode = 2
@@ -213,44 +199,54 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
 
-[node name="Vacas" type="VBoxContainer" parent="Control/AnimalsContainer/Column1"]
+[node name="Vacas" type="HBoxContainer" parent="Control/AnimalsContainer/Column1"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TopRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Vacas"]
+[node name="TopRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column1/Vacas"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="VacasNameLabel" type="Label" parent="Control/AnimalsContainer/Column1/Vacas/TopRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Vacas"
 
-[node name="VacasQuantityLabel" type="Label" parent="Control/AnimalsContainer/Column1/Vacas/TopRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Quantity: 0"
-
-[node name="BottomRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Vacas"]
-layout_mode = 2
-
-[node name="VacasSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column1/Vacas/BottomRow"]
+[node name="VacasSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column1/Vacas/TopRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Sale Info: $"
+
+[node name="BottomRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column1/Vacas"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VacasQuantityLabel" type="Label" parent="Control/AnimalsContainer/Column1/Vacas/BottomRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Quantity: 0"
 
 [node name="VacasBuyButton" type="Button" parent="Control/AnimalsContainer/Column1/Vacas/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
 
+[node name="SpacerCenter" type="Control" parent="Control/AnimalsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.12
+
 [node name="Column2" type="VBoxContainer" parent="Control/AnimalsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Perros" type="VBoxContainer" parent="Control/AnimalsContainer/Column2"]
+[node name="Perros" type="HBoxContainer" parent="Control/AnimalsContainer/Column2"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TopRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column2/Perros"]
+[node name="TopRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column2/Perros"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="PerrosNameLabel" type="Label" parent="Control/AnimalsContainer/Column2/Perros/TopRow"]
 layout_mode = 2
@@ -262,8 +258,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quantity: 0"
 
-[node name="BottomRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column2/Perros"]
+[node name="BottomRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column2/Perros"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="PerrosSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column2/Perros/BottomRow"]
 layout_mode = 2
@@ -275,11 +272,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
 
-[node name="Gatos" type="VBoxContainer" parent="Control/AnimalsContainer/Column2"]
+[node name="Gatos" type="HBoxContainer" parent="Control/AnimalsContainer/Column2"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TopRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column2/Gatos"]
+[node name="TopRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column2/Gatos"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="GatosNameLabel" type="Label" parent="Control/AnimalsContainer/Column2/Gatos/TopRow"]
 layout_mode = 2
@@ -291,8 +290,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quantity: 0"
 
-[node name="BottomRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column2/Gatos"]
+[node name="BottomRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column2/Gatos"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="GatosSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column2/Gatos/BottomRow"]
 layout_mode = 2
@@ -304,11 +304,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
 
-[node name="Águilas" type="VBoxContainer" parent="Control/AnimalsContainer/Column2"]
+[node name="Águilas" type="HBoxContainer" parent="Control/AnimalsContainer/Column2"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TopRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column2/Águilas"]
+[node name="TopRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column2/Águilas"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ÁguilasNameLabel" type="Label" parent="Control/AnimalsContainer/Column2/Águilas/TopRow"]
 layout_mode = 2
@@ -320,8 +322,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quantity: 0"
 
-[node name="BottomRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column2/Águilas"]
+[node name="BottomRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column2/Águilas"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ÁguilasSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column2/Águilas/BottomRow"]
 layout_mode = 2
@@ -333,11 +336,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
 
-[node name="Osos" type="VBoxContainer" parent="Control/AnimalsContainer/Column2"]
+[node name="Osos" type="HBoxContainer" parent="Control/AnimalsContainer/Column2"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TopRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column2/Osos"]
+[node name="TopRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column2/Osos"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="OsosNameLabel" type="Label" parent="Control/AnimalsContainer/Column2/Osos/TopRow"]
 layout_mode = 2
@@ -349,8 +354,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quantity: 0"
 
-[node name="BottomRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column2/Osos"]
+[node name="BottomRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column2/Osos"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="OsosSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column2/Osos/BottomRow"]
 layout_mode = 2
@@ -362,11 +368,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
 
-[node name="Elefantes" type="VBoxContainer" parent="Control/AnimalsContainer/Column2"]
+[node name="Elefantes" type="HBoxContainer" parent="Control/AnimalsContainer/Column2"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="TopRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column2/Elefantes"]
+[node name="TopRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column2/Elefantes"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ElefantesNameLabel" type="Label" parent="Control/AnimalsContainer/Column2/Elefantes/TopRow"]
 layout_mode = 2
@@ -378,8 +386,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Quantity: 0"
 
-[node name="BottomRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column2/Elefantes"]
+[node name="BottomRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column2/Elefantes"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ElefantesSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column2/Elefantes/BottomRow"]
 layout_mode = 2
@@ -390,6 +399,11 @@ text = "Sale Info: $"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
+
+[node name="SpacerRight" type="Control" parent="Control/AnimalsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.29
 
 [connection signal="pressed" from="Control/Header/QuantityButton" to="Control" method="_on_quantity_button_pressed"]
 [connection signal="pressed" from="Control/AnimalsContainer/Column1/Conejos/BottomRow/ConejosBuyButton" to="Control" method="_on_animal_buy_button_pressed" binds= ["Conejos"]]

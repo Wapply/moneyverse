@@ -1,6 +1,6 @@
 extends Control
 
-var money = 100 # Start with some money
+var money = 10 # Start with some money
 var selected_quantity = 1 # Default quantity
 
 var animals = {
@@ -134,7 +134,7 @@ func update_animal_display(animal_name):
 	
 	if animal_labels.has(quantity_label_key) and animal_labels[quantity_label_key] != null:
 		var quantity_label = animal_labels[quantity_label_key]
-		quantity_label.text = "Quantity: " + str(animal.quantity)
+		quantity_label.text = str(animal.quantity)
 
 func update_sale_info_labels():
 	for animal_name in animals:
