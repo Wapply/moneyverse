@@ -212,19 +212,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Vacas"
 
-[node name="VacasSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column1/Vacas/TopRow"]
+[node name="VacasQuantityLabel" type="Label" parent="Control/AnimalsContainer/Column1/Vacas/TopRow"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Sale Info: $"
+text = "Quantity: 0"
 
 [node name="BottomRow" type="VBoxContainer" parent="Control/AnimalsContainer/Column1/Vacas"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VacasQuantityLabel" type="Label" parent="Control/AnimalsContainer/Column1/Vacas/BottomRow"]
+[node name="VacasSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column1/Vacas/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Quantity: 0"
+text = "Sale Info: $"
 
 [node name="VacasBuyButton" type="Button" parent="Control/AnimalsContainer/Column1/Vacas/BottomRow"]
 layout_mode = 2
