@@ -80,10 +80,13 @@ func setup_animal_timers():
 	print("Setting up animal timers...")
 	for animal_name in animals:
 		if not animals[animal_name].has("timer") or animals[animal_name]["timer"] == null: # Ensure timer is not already set up if this can be called multiple times
-			# Use create_timer instead of Timer.new()
-			var timer = create_timer(animals[animal_name]["current_sale_time"])
-			animals[animal_name]["timer"] = timer # Store the timer reference
+			var timer = Timer.new()
+			animals[animal_name]["timer"] = timer
+			timer.wait_time = animals[animal_name]["current_sale_time"]
+			timer.autostart = true # Timer will start after its wait_time is first set
 			timer.timeout.connect(Callable(self, "sell_animal").bind(animal_name))
+			# Use call_deferred to add the timer as a child in a deferred manner
+			call_deferred("add_child", timer)
 			print("Timer set up for ", animal_name, " with wait time ", timer.wait_time)
 		else:
 			print("Timer already exists for ", animal_name)
@@ -143,14 +146,12 @@ func update_sale_info_labels():
 
 func check_speed_threshold(animal_name):
 	var animal = animals[animal_name]
-	if animal.current_threshold_index < animal.speed_thresholds.size():
-		var threshold = animal.speed_thresholds[animal.current_threshold_index]
-		if animal.quantity >= threshold:
+		if animal.quantity >= animal.speed_thresholds[min(animal.current_threshold_index, animal.speed_thresholds.size() - 1)]:
 			animal.current_sale_time = max(0.5, animal.current_sale_time / 2.0)
 			if animal.timer != null: # Check if timer exists
 				animal.timer.wait_time = animal.current_sale_time
 				animal.timer.start()  # Restart the timer with the new speed
-			animal.current_threshold_index += 1
+			animal.current_threshold_index = min(animal.current_threshold_index + 1, animal.speed_thresholds.size() - 1)
 			update_sale_info_labels() # Sale time changed, so update relevant label
 
 func _on_quantity_button_pressed():
