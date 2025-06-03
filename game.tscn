@@ -34,7 +34,6 @@ grow_horizontal = 2
 [node name="MoneyLabel" type="Label" parent="Control/Header"]
 layout_mode = 2
 text = "DINERO BILLION"
-hanignment = 1
 vertical_alignment = 1
 
 [node name="QuantityButton" type="Button" parent="Control/Header"]
@@ -61,13 +60,11 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PRODUCTO"
-hanignment = 1
 
 [node name="VelocidadGananciaLabel1" type="Label" parent="Control/ColumnHeader/Column1Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "VELOCIDAD DE VENTA + GANANCIA"
-hanignment = 1
 
 [node name="Column2Header" type="HBoxContainer" parent="Control/ColumnHeader"]
 layout_mode = 2
@@ -77,13 +74,11 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PRODUCTO"
-hanignment = 1
 
 [node name="VelocidadGananciaLabel2" type="Label" parent="Control/ColumnHeader/Column2Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "VELOCIDAD DE VENTA + GANANCIA"
-hanignment = 1
 
 [node name="SpacerRight" type="Control" parent="Control/ColumnHeader"]
 layout_mode = 2
@@ -127,35 +122,6 @@ size_flags_horizontal = 3
 text = "Sale Info: $"
 
 [node name="ConejosBuyButton" type="Button" parent="Control/AnimalsContainer/Column1/Conejos/BottomRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "BUY"
-
-[node name="Gallinas" type="VBoxContainer" parent="Control/Control/AnimalsContainer/Column1"]
-layout_mode = 2
-
-[node name="TopRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Gallinas"]
-layout_mode = 2
-
-[node name="GallinasNameLabel" type="Label" parent="Control/AnimalsContainer/Column1/Gallinas/TopRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Gallinas"
-
-[node name="GallinasQuantityLabel" type="Label" parent="Control/AnimalsContainer/Column1/Gallinas/TopRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Quantity: 0"
-
-[node name="BottomRow" type="HBoxContainer" parent="Control/AnimalsContainer/Column1/Gallinas"]
-layout_mode = 2
-
-[node name="GallinasSaleInfoLabel" type="Label" parent="Control/AnimalsContainer/Column1/Gallinas/BottomRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Sale Info: $"
-
-[node name="GallinasBuyButton" type="Button" parent="Control/AnimalsContainer/Column1/Gallinas/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
@@ -396,9 +362,30 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "BUY"
 
+[node name="Control_Control_AnimalsContainer_Column1#Gallinas" type="VBoxContainer" parent="."]
+
+[node name="Control_AnimalsContainer_Column1_Gallinas#TopRow" type="HBoxContainer" parent="."]
+
+[node name="Control_AnimalsContainer_Column1_Gallinas_TopRow#GallinasNameLabel" type="Label" parent="."]
+size_flags_horizontal = 3
+text = "Gallinas"
+
+[node name="Control_AnimalsContainer_Column1_Gallinas_TopRow#GallinasQuantityLabel" type="Label" parent="."]
+size_flags_horizontal = 3
+text = "Quantity: 0"
+
+[node name="Control_AnimalsContainer_Column1_Gallinas#BottomRow" type="HBoxContainer" parent="."]
+
+[node name="Control_AnimalsContainer_Column1_Gallinas_BottomRow#GallinasSaleInfoLabel" type="Label" parent="."]
+size_flags_horizontal = 3
+text = "Sale Info: $"
+
+[node name="Control_AnimalsContainer_Column1_Gallinas_BottomRow#GallinasBuyButton" type="Button" parent="."]
+size_flags_horizontal = 3
+text = "BUY"
+
 [connection signal="pressed" from="Control/Header/QuantityButton" to="Control" method="_on_quantity_button_pressed"]
 [connection signal="pressed" from="Control/AnimalsContainer/Column1/Conejos/BottomRow/ConejosBuyButton" to="Control" method="_on_animal_buy_button_pressed" binds= ["Conejos"]]
-[connection signal="pressed" from="Control/AnimalsContainer/Column1/Gallinas/BottomRow/GallinasBuyButton" to="Control" method="_on_animal_buy_button_pressed" binds= ["Gallinas"]]
 [connection signal="pressed" from="Control/AnimalsContainer/Column1/Cerdos/BottomRow/CerdosBuyButton" to="Control" method="_on_animal_buy_button_pressed" binds= ["Cerdos"]]
 [connection signal="pressed" from="Control/AnimalsContainer/Column1/Caballos/BottomRow/CaballosBuyButton" to="Control" method="_on_animal_buy_button_pressed" binds= ["Caballos"]]
 [connection signal="pressed" from="Control/AnimalsContainer/Column1/Vacas/BottomRow/VacasBuyButton" to="Control" method="_on_animal_buy_button_pressed" binds= ["Vacas"]]
