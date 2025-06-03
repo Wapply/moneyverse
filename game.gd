@@ -118,7 +118,7 @@ func sell_animal(animal_name): # animal_name is bound from timer
 	print("sell_animal called with animal_name: ", animal_name, " quantity: ", animals[animal_name].quantity)
 	var animal = animals[animal_name]
 	if animal.quantity > 0:
-		money += animal.price * animal.quantity  # Use base_price for selling
+		money += animal.base_price * animal.quantity  # Use base_price for selling
 		update_money_display()
 	# else: # No need to print if no animals to sell every tick
 		# print("No ", animal_name, " to sell.")
