@@ -117,7 +117,7 @@ func buy_animal(animal_name):
 		print("Not enough money to buy ", quantity_to_buy, " ", animal_name, ". Money: ", money, ", Cost: ", cost)
 
 func sell_animal(animal_name): # animal_name is bound from timer
-	print("sell_animal called with animal_name: ", animal_name)
+	print("sell_animal called with animal_name: ", animal_name, " quantity: ", animals[animal_name].quantity)
 	var animal = animals[animal_name]
 	if animal.quantity > 0:
 		money += animal.price * animal.quantity  # Use base_price for selling
