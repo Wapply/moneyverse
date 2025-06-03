@@ -16,18 +16,37 @@ var animals = {
 	"Elefantes": {"price": 5000, "quantity": 0, "sale_time": 60, "current_sale_time": 60, "base_price": 5000, "timer": null, "speed_thresholds": [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600], "current_threshold_index": 0}
 }
 
-@onready var money_label = get_node("VBoxContainer/MoneyLabel")
-@onready var conejos_sale_info_label = get_node("VBoxContainer/ConejosSaleInfoLabel")
-@onready var quantity_button = get_node("VBoxContainer/QuantityButton") # Reference to the Quantity Button
+@onready var money_label = get_node("Control/Header/MoneyLabel")
+@onready var quantity_button = get_node("Control/Header/QuantityButton")
+
+var animal_labels = {}
+var animal_buy_buttons = {}
 
 var quantities = [1, 10, 100, "MAX"]
 var quantity_index = 0
 
 func _ready():
+	initialize_animal_nodes()
 	update_money_display()
 	setup_animal_timers()
 	update_sale_info_labels()
 	update_quantity_button_text()
+
+func initialize_animal_nodes():
+	var column1 = get_node("Control/AnimalsContainer/Column1")
+	var column2 = get_node("Control/AnimalsContainer/Column2")
+
+	var animal_names = animals.keys()
+
+	for i in range(animal_names.size()):
+		var animal_name = animal_names[i]
+		var column = column1 if i < 5 else column2
+		var animal_node_path = "Control/AnimalsContainer/" + column.name + "/" + animal_name
+
+		animal_labels[animal_name + "NameLabel"] = get_node(animal_node_path + "/TopRow/" + animal_name + "NameLabel")
+		animal_labels[animal_name + "QuantityLabel"] = get_node(animal_node_path + "/TopRow/" + animal_name + "QuantityLabel")
+		animal_labels[animal_name + "SaleInfoLabel"] = get_node(animal_node_path + "/BottomRow/" + animal_name + "SaleInfoLabel")
+		animal_buy_buttons[animal_name + "BuyButton"] = get_node(animal_node_path + "/BottomRow/" + animal_name + "BuyButton")
 
 func setup_animal_timers():
 	print("Setting up animal timers...")
@@ -85,14 +104,15 @@ func update_money_display():
 
 func update_animal_display(animal_name):
 	var animal = animals[animal_name]
-	var quantity_label = get_node("VBoxContainer/" + animal_name + "QuantityLabel")
-	quantity_label.text = str(animal.quantity)
+	var quantity_label = animal_labels[animal_name + "QuantityLabel"]
+	quantity_label.text = "Quantity: " + str(animal.quantity)
 
 func update_sale_info_labels():
-	if conejos_sale_info_label != null:
-		conejos_sale_info_label.text = "Sale Price: $" + str(animals["Conejos"]["price"])
-	else:
-		print("Error: ConejosSaleInfoLabel node not found at path 'VBoxContainer/ConejosSaleInfoLabel'. Please check your scene structure.")
+	for animal_name in animals:
+		var animal = animals[animal_name]
+		var sale_info_label = animal_labels[animal_name + "SaleInfoLabel"]
+		sale_info_label.text = "Sale Price: $" + str(int(animal.price)) + " | Time: " + str(round(animal.current_sale_time * 10) / 10) + "s"
+
 
 func check_speed_threshold(animal_name):
 	var animal = animals[animal_name]
@@ -117,6 +137,3 @@ func update_quantity_button_text():
 #Generic buy function to be connected for all animals
 func _on_animal_buy_button_pressed(animal_name):
 	buy_animal(animal_name)
-
-func _on_conejos_buy_button_pressed(Conejos):
-	buy_animal(Conejos)
