@@ -101,6 +101,7 @@ text = "Sale Info: $"
 [node name="ConejosBuyButton" type="Button" parent="Control/AnimalsContainer/Column1/Conejos/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "BUY"
 
 [node name="Gallinas" type="HBoxContainer" parent="Control/AnimalsContainer/Column1"]
@@ -133,6 +134,7 @@ text = "Sale Info: $"
 [node name="GallinasBuyButton" type="Button" parent="Control/AnimalsContainer/Column1/Gallinas/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "BUY"
 
 [node name="Cerdos" type="HBoxContainer" parent="Control/AnimalsContainer/Column1"]
@@ -165,6 +167,7 @@ text = "Sale Info: $"
 [node name="CerdosBuyButton" type="Button" parent="Control/AnimalsContainer/Column1/Cerdos/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "BUY"
 
 [node name="Caballos" type="HBoxContainer" parent="Control/AnimalsContainer/Column1"]
@@ -197,6 +200,7 @@ text = "Sale Info: $"
 [node name="CaballosBuyButton" type="Button" parent="Control/AnimalsContainer/Column1/Caballos/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "BUY"
 
 [node name="Vacas" type="HBoxContainer" parent="Control/AnimalsContainer/Column1"]
@@ -229,6 +233,7 @@ text = "Sale Info: $"
 [node name="VacasBuyButton" type="Button" parent="Control/AnimalsContainer/Column1/Vacas/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "BUY"
 
 [node name="SpacerCenter" type="Control" parent="Control/AnimalsContainer"]
@@ -270,6 +275,7 @@ text = "Sale Info: $"
 [node name="PerrosBuyButton" type="Button" parent="Control/AnimalsContainer/Column2/Perros/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "BUY"
 
 [node name="Gatos" type="HBoxContainer" parent="Control/AnimalsContainer/Column2"]
@@ -302,6 +308,7 @@ text = "Sale Info: $"
 [node name="GatosBuyButton" type="Button" parent="Control/AnimalsContainer/Column2/Gatos/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "BUY"
 
 [node name="Águilas" type="HBoxContainer" parent="Control/AnimalsContainer/Column2"]
@@ -334,6 +341,7 @@ text = "Sale Info: $"
 [node name="ÁguilasBuyButton" type="Button" parent="Control/AnimalsContainer/Column2/Águilas/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "BUY"
 
 [node name="Osos" type="HBoxContainer" parent="Control/AnimalsContainer/Column2"]
@@ -366,6 +374,7 @@ text = "Sale Info: $"
 [node name="OsosBuyButton" type="Button" parent="Control/AnimalsContainer/Column2/Osos/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "BUY"
 
 [node name="Elefantes" type="HBoxContainer" parent="Control/AnimalsContainer/Column2"]
@@ -398,6 +407,7 @@ text = "Sale Info: $"
 [node name="ElefantesBuyButton" type="Button" parent="Control/AnimalsContainer/Column2/Elefantes/BottomRow"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "BUY"
 
 [node name="SpacerRight" type="Control" parent="Control/AnimalsContainer"]
